@@ -1,24 +1,15 @@
 *{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;background:#f3ecd9;color:#1d1812;font:17px/1.7 Georgia,"Times New Roman",serif}
-.hero,.layout{width:min(980px,calc(100% - 32px));margin:auto}
-.hero{padding:56px 0 24px}
-.eyebrow,.section-tag,.placeholder{font-family:"Courier New",monospace}
-.eyebrow{margin:0 0 12px;color:#8b2e1d;letter-spacing:.16em;text-transform:uppercase;font-size:12px}
-.hero h1{margin:0;font-size:clamp(42px,8vw,78px);line-height:1;max-width:10ch;text-transform:uppercase}
-.hero__meta,.hero__description,.card p{color:#5b5248}
-.hero__meta{margin:14px 0 0}
-.hero__description{max-width:42rem}
-.hero__nav{display:flex;flex-wrap:wrap;gap:10px;padding:14px 0 0;border-top:1px solid #1d1812;margin-top:28px}
-.hero__nav a{color:#1d1812;text-decoration:none}
-.hero__nav a:hover{text-decoration:underline}
-.layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:2px solid #1d1812;border-left:1px solid #1d1812;margin-bottom:48px}
-.card{padding:22px 20px;border-right:1px solid #1d1812;border-bottom:1px solid #1d1812;background:#faf6ee;min-height:220px}
-.card--wide{grid-column:1/-1}
-.section-tag{margin:0 0 8px;color:#8b2e1d;font-size:12px}
-.card h2{margin:0;font-size:24px;text-transform:uppercase;letter-spacing:.04em}
-.placeholder{display:inline-block;padding:8px 10px;background:#e8dcc3;color:#1d1812}
-@media (max-width:760px){
-  .hero{padding-top:40px}
-  .layout{grid-template-columns:1fr}
-  .card,.card--wide{grid-column:auto;min-height:auto}
-}
+body{margin:0;background:#fff;color:#000;font:18px/1.5 "Times New Roman",Times,serif}
+a{color:#00e}
+.hero,.layout{width:min(860px,calc(100% - 32px));margin:0 auto}
+.hero{padding:24px 0 12px}
+.eyebrow,.section-tag,.placeholder{font:14px/1.4 "Courier New",monospace}
+.eyebrow,.section-tag{margin:0 0 8px}
+.hero h1{margin:0;font-size:40px;font-weight:700}
+.hero__meta,.hero__description,.card p{margin:10px 0}
+.hero__nav{display:flex;flex-wrap:wrap;gap:12px;padding:12px 0;border-top:1px solid #999;border-bottom:1px solid #999}
+.hero__nav a{text-decoration:underline}
+.layout{display:block;padding:12px 0 40px}
+.card{padding:10px 0;border-bottom:1px solid #ccc}
+.card h2{margin:0;font-size:26px;font-weight:700}
+.placeholder{display:inline-block;padding:2px 6px;background:#f3f3f3}
