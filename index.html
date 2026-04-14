@@ -3,28 +3,129 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Proposal Webpage</title>
-    <link rel="stylesheet" href="styles.css?v=20260325-1710" />
+    <title>Project Documents</title>
+    <link rel="stylesheet" href="styles.css?v=20260414-1" />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <header class="hero">
       <div class="hero__content">
-        <p class="eyebrow">15-418 / 15-618 Final Project Proposal</p>
-        <h1>Project Proposal</h1>
-        <p class="hero__meta">Main content embedded below as a PDF.</p>
+        <p class="eyebrow">15-418 / 15-618 Final Project</p>
+        <h1>Project Documents</h1>
+        <p class="hero__meta">Use the tabs below to switch between the proposal and the milestone report.</p>
         <p class="hero__description">
-          <a href="15618_project_proposal-2.pdf">Open or download the PDF directly</a>
+          <a href="15618_project_proposal-2.pdf">Open the proposal PDF</a>
+          <span aria-hidden="true"> · </span>
+          <a href="15618_project_milestone_report.pdf">Open the milestone report PDF</a>
         </p>
       </div>
     </header>
 
     <main class="layout">
-      <object class="pdf" data="15618_project_proposal-2.pdf#view=FitH" type="application/pdf">
-        <p>
-          Your browser could not embed the PDF.
-          <a href="15618_project_proposal-2.pdf">Open it here</a>.
+      <div class="tabs" role="tablist" aria-label="Project documents">
+        <button
+          class="tab is-active"
+          type="button"
+          role="tab"
+          id="tab-proposal"
+          aria-controls="panel-proposal"
+          aria-selected="true"
+        >
+          Proposal
+        </button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          id="tab-milestone"
+          aria-controls="panel-milestone"
+          aria-selected="false"
+          tabindex="-1"
+        >
+          Milestone Report
+        </button>
+      </div>
+
+      <section class="pdf-panel is-active" role="tabpanel" id="panel-proposal" aria-labelledby="tab-proposal">
+        <p class="panel__link">
+          <a href="15618_project_proposal-2.pdf">Open or download the proposal PDF directly</a>
         </p>
-      </object>
+        <object class="pdf" data="15618_project_proposal-2.pdf#view=FitH" type="application/pdf">
+          <p>
+            Your browser could not embed the PDF.
+            <a href="15618_project_proposal-2.pdf">Open it here</a>.
+          </p>
+        </object>
+      </section>
+
+      <section class="pdf-panel" role="tabpanel" id="panel-milestone" aria-labelledby="tab-milestone">
+        <p class="panel__link">
+          <a href="15618_project_milestone_report.pdf">Open or download the milestone report PDF directly</a>
+        </p>
+        <object
+          class="pdf"
+          data="15618_project_milestone_report.pdf#view=FitH"
+          type="application/pdf"
+        >
+          <p>
+            Your browser could not embed the PDF.
+            <a href="15618_project_milestone_report.pdf">Open it here</a>.
+          </p>
+        </object>
+      </section>
     </main>
+
+    <script>
+      const tabs = Array.from(document.querySelectorAll(".tab"));
+      const panels = Array.from(document.querySelectorAll(".pdf-panel"));
+
+      function activateTab(nextTab) {
+        const targetId = nextTab.getAttribute("aria-controls");
+
+        tabs.forEach((tab) => {
+          const isActive = tab === nextTab;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+          tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        panels.forEach((panel) => {
+          const isActive = panel.id === targetId;
+          panel.classList.toggle("is-active", isActive);
+          panel.hidden = !isActive;
+        });
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activateTab(tab));
+        tab.addEventListener("keydown", (event) => {
+          if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+            return;
+          }
+
+          event.preventDefault();
+
+          let nextIndex = index;
+          if (event.key === "ArrowRight") {
+            nextIndex = (index + 1) % tabs.length;
+          } else if (event.key === "ArrowLeft") {
+            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === "Home") {
+            nextIndex = 0;
+          } else if (event.key === "End") {
+            nextIndex = tabs.length - 1;
+          }
+
+          tabs[nextIndex].focus();
+          activateTab(tabs[nextIndex]);
+        });
+      });
+
+      panels.forEach((panel) => {
+        panel.hidden = !panel.classList.contains("is-active");
+      });
+    </script>
   </body>
 </html>
